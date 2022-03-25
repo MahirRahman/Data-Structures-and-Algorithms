@@ -14,30 +14,32 @@
  * }
  */
 class Solution {
-    // public List<Integer> inorderTraversal(TreeNode root) {
-    //     List<Integer> list = new LinkedList<Integer>();
-    //     Stack<TreeNode> stack = new Stack<TreeNode>();
-    //     stack.push(root);
-    //     while (!stack.isEmpty()) {
-    //         TreeNode visiting = stack.pop();
-    //         if (visiting != null) {
-    //             stack.push(visiting.right);
-    //             stack.push(visiting.left);
-    //             list.add(visiting.val);
-    //         }
-    //     }
-    //     return list;
-    // }
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new LinkedList<Integer>();
-        inorderTraversal(root, list);
-        return list;
-    }
+//     public List<Integer> inorderTraversal(TreeNode root) {
+//         List<Integer> list = new LinkedList<Integer>();
+//         inorderTraversal(root, list);
+//         return list;
+//     }
     
-    public void inorderTraversal(TreeNode root, List<Integer> list) {
-        if (root == null) return;
-        if (root.left != null) inorderTraversal(root.left, list);
-        list.add(root.val);
-        if (root.right != null) inorderTraversal(root.right, list);   
+//     public void inorderTraversal(TreeNode root, List<Integer> list) {
+//         if (root == null) return;
+//         if (root.left != null) inorderTraversal(root.left, list);
+//         list.add(root.val);
+//         if (root.right != null) inorderTraversal(root.right, list);   
+//     }
+    
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Deque<TreeNode> stk = new LinkedList<>();
+        List<Integer> lst = new LinkedList<>();
+        TreeNode curr = root;
+        while (curr != null || !stk.isEmpty()) {
+            while (curr != null) {
+                stk.push(curr);
+                curr = curr.left;
+            }
+            curr = stk.poll();
+            lst.add(curr.val);
+            curr = curr.right;    
+        }
+        return lst;
     }
 }
