@@ -4,7 +4,7 @@ class Solution:
         l = 0
         longest = 0
         for i in range(len(s)):
-            if (d.get(s[i]) != None):
+            if (s[i] in d):
                 l = max(l, d.get(s[i]) + 1)
             d[s[i]]= i
             longest = max(longest, i - l + 1)
