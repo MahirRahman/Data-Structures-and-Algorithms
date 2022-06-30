@@ -8,12 +8,13 @@ class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
         if root is None:
             return 0
-        ans = 0
-        if root.left:
-            if root.left.left is None and root.left.right is None:
-                ans += root.left.val
-            else:
-                ans += self.sumOfLeftLeaves(root.left)
-        ans += self.sumOfLeftLeaves(root.right)
-        return ans
-            
+        return self.lsum(root, False)
+    
+    def lsum(self, root, lnode):
+        if not root:
+            return 0
+        if not root.left and not root.right:
+                return root.val if lnode else 0
+        return self.lsum(root.left, True) + self.lsum(root.right, False)
+        
+        
