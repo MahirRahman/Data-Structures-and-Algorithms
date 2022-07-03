@@ -9,16 +9,12 @@ class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         if root is None:
             return True
-        return self.inOrderTraversal(root, None)[0]
+        return self.preOrderTraversal(root, float('-inf'), float('inf'))
     
-    def inOrderTraversal(self, root, prev):
+    def preOrderTraversal(self, root, min, max):
         if root is None:
-            return True, prev
-        l, prev = self.inOrderTraversal(root.left, prev)
-        if prev and prev.val >= root.val:
-            return False, prev
-        prev = root
-        r, prev = self.inOrderTraversal(root.right, prev)
-        return l and r, prev
-        
+            return True
+        if root.val >= max or root.val <= min:
+            return False
+        return self.preOrderTraversal(root.left, min, root.val) and self.preOrderTraversal(root.right, root.val, max)
         
