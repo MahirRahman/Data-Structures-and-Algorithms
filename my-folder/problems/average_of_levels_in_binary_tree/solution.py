@@ -7,20 +7,19 @@
 class Solution:
     def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
         if root is None:
-            return []
-        queue = collections.deque([root])
-        avg = []
+            return 0
+        queue = deque()
+        queue.append(root)
+        res = []
         while queue:
-            temp = len(queue)
-            sum = 0
-            for _ in range(temp):
+            count = len(queue)
+            s = 0
+            for _ in range(count):
                 node = queue.popleft()
-                sum += node.val
+                s += node.val
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            avg.append(sum / temp)
-        return avg
-            
-                
+            res.append(s/count)
+        return res
